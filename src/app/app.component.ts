@@ -45,6 +45,9 @@ export class AppComponent {
     this.lesson$.update({description: "Angular Tutorial For Beginners - Build Your First App - Hello World Step By Step"});
   }
   objectSet() {
+    // set is a destructive method that replaces node contents completely
+    // the following line would copy just the description to the node, loosing the other properties
+      // this.lesson$.update({description: "Angular Tutorial For Beginners - Build Your First App - Hello World Step By Step"});
 
   }
 
