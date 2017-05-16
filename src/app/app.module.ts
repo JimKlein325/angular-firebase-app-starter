@@ -10,10 +10,13 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
+import { MasterDetailComponent } from './master-detail/master-detail.component';
+import { CoursesService } from 'app/courses.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MasterDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,7 @@ import 'rxjs/add/operator/switchMap';
     AngularFireDatabaseModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CoursesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
