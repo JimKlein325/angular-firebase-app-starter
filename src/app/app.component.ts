@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 // import { initializeApp, database } from 'firebase';
 // import { firebaseConfig } from "environments/firebase.config";
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { CoursesService } from "app/courses.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +17,11 @@ export class AppComponent {
   
 
 
-  constructor(private db: AngularFireDatabase){
+  constructor(private db: AngularFireDatabase, private coursesService: CoursesService){
       this.courses$ =  db.list('courses');
-      this.courses$.subscribe(console.log);
+      //this.courses$.subscribe(console.log);
       this.lesson$ = db.object('lessons/-KjrtsgyRXZfpH4q2YsS');
-      this.lesson$.subscribe(console.log)
+      //this.lesson$.subscribe(console.log)
 
       this.courses$.map(courses => courses[0])
         .subscribe(
@@ -28,6 +29,17 @@ export class AppComponent {
         );
 
   }
+
+  ngOnInit(){
+    const courses$ = this.coursesService.findAllLessonsForCourse("getting-started-with-angular2");
+  }
+
+
+
+
+
+
+
   listPush() {
     this.courses$.push({description: 'Test New Course'})
     .then(
