@@ -27,23 +27,24 @@ export class CoursesService {
     course$.subscribe();
     // ;
 
-    // this.db.list('lessonsPerCourse/' + courseKey);
-    // const lessonsPerCourse$ = course$
-    //   .switchMap(course => this.db.list('lessonsPerCourse/' + course.$key))
-    //   .do(console.log);
+    //this.db.list('lessonsPerCourse/' + courseKey);
+    const lessonsPerCourse$ = course$
+      .switchMap(course => this.db.list('lessonsPerCourse/' + course.$key))
+      .do(console.log);
+lessonsPerCourse$.subscribe();
 
 
 
 
-    // // this.db.object('lessons/' + couseLessonIdentifier.$key)
-    // const lessons$: Observable<Lesson[]> = lessonsPerCourse$
-    //   .map(lessonsPerCourse =>
-    //     lessonsPerCourse.map(couseLessonIdentifier =>
-    //       this.db.object('lessons/' + couseLessonIdentifier.$key)))
-    //   .flatMap(fbojs => Observable.combineLatest(fbojs))
-    //   .do(console.log);
+    //  this.db.object('lessons/' + couseLessonIdentifier.$key)
+    const lessons$: Observable<Lesson[]> = lessonsPerCourse$
+      .map(lessonsPerCourse =>
+        lessonsPerCourse.map(couseLessonIdentifier =>
+          this.db.object('lessons/' + couseLessonIdentifier.$key)))
+      .flatMap(fbojs => Observable.combineLatest(fbojs))
+      .do(console.log);
 
-    // lessons$.subscribe();
+    lessons$.subscribe();
 
     return Observable.of([]);
   }
